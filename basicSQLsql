@@ -1,0 +1,79 @@
+USE AdventureWorks2019
+GO
+
+-- 1) overview
+SELECT ProductID, Name, Color, ListPrice
+FROM Production.Product;
+
+-- 2) exclude listprice == 0
+SELECT ProductID, Name, Color, ListPrice
+FROM Production.Product
+WHERE ListPrice <> 0;
+
+-- 3) color is null
+SELECT ProductID, Name, Color, ListPrice
+FROM Production.Product
+WHERE Color IS NULL;
+
+-- 4) color is not null
+SELECT ProductID, Name, Color, ListPrice
+FROM Production.Product
+WHERE Color IS NOT NULL;
+
+-- 5) color is not null and listprice > 0
+SELECT ProductID, Name, Color, ListPrice
+FROM Production.Product
+WHERE Color IS NOT NULL
+AND ListPrice > 0;
+
+-- 6) name + color concat + exclude null color
+SELECT Name + ' ' + Color AS new_name
+FROM Production.Product
+WHERE Color IS NOT NULL;
+
+-- 7) color is black or silver
+SELECT Name, Color
+FROM Production.Product
+WHERE Color = 'Black'
+OR Color = 'Silver';
+
+-- 8) production id between 400 and 500
+SELECT ProductID, Name
+FROM Production.Product
+WHERE ProductID BETWEEN 400 AND 500;
+
+-- 9) color black or blue
+SELECT Name, Color
+FROM Production.Product
+WHERE Color = 'Black'
+OR Color = 'Blue';
+
+-- 10) begin with letter S
+SELECT ProductID, Name
+FROM Production.Product
+WHERE Name LIKE 'S%';
+
+-- 11) order by name
+SELECT Name, ListPrice
+FROM Production.Product
+WHERE Name LIKE 'S%'
+ORDER BY Name;
+
+-- 12) name start A or S
+SELECT Name, ListPrice
+FROM Production.Product
+WHERE Name LIKE 'A%' OR Name LIKE 'S%'
+ORDER BY Name;
+
+-- 13) Name starts with 'SPO' but not followed by K
+SELECT Name
+FROM Production.Product
+WHERE Name LIKE 'SPO%' AND Name NOT LIKE 'SPOK%'
+ORDER BY Name;
+
+
+-- 14) Unique color, order desc
+SELECT DISTINCT Color
+FROM Production.Product
+WHERE Color IS NOT NULL
+ORDER BY Color DESC;
